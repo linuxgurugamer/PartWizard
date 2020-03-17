@@ -54,3 +54,6 @@ Changes
 	Added InstallChecker
 	Updated AssemblyVersion
 	Updated for KSP 1.8
+
+1.3.8.1
+	Fixed sort by stage ascending/descending from having constant resorting going on

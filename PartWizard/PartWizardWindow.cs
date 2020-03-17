@@ -343,6 +343,10 @@ namespace PartWizard
                 }
 
 #endregion
+
+                // The sort by stage was constantly changing the sort, so by doing a sort on 
+                // the persistentId if the stages are equal, the sort stays consistent
+                //
                 if (parts != null && parts.Count > 0)
                 {
                     switch (sortBy)
@@ -352,15 +356,30 @@ namespace PartWizard
                             break;
                         case SortBy.StageAsc:
                             if (this.viewType != ViewType.Unavailable)
-                                parts.Sort((p, q) => p.inverseStage.CompareTo(q.inverseStage));
+                                parts.Sort((p, q) =>
+                                {
+                                    if (p.inverseStage == q.inverseStage)
+                                        return p.persistentId.CompareTo(q.persistentId);
+                                    else
+                                        return p.inverseStage.CompareTo(q.inverseStage);
+                                });
                             else
                                 parts.Sort((p, q) => p.partInfo.title.CompareTo(q.partInfo.title));
                             break;
                         case SortBy.StageDesc:
                             if (this.viewType != ViewType.Unavailable)
-                                parts.Sort((q, p) => p.inverseStage.CompareTo(q.inverseStage));
+                            {
+                                parts.Sort((q, p) =>
+                                {
+                                    if (p.inverseStage == q.inverseStage)
+                                        return p.persistentId.CompareTo(q.persistentId);
+                                    else return p.inverseStage.CompareTo(q.inverseStage);
+                                });
+                            }
                             else
+                            {
                                 parts.Sort((p, q) => p.partInfo.title.CompareTo(q.partInfo.title));
+                            }
                             break;
                     }
                 }
