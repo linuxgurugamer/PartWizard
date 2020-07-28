@@ -281,6 +281,7 @@ namespace PartWizard
                 // If Blizzy's toolbar is available, give the user the option to pick the stock toolbar.
                 if(ToolbarManager.ToolbarAvailable)
 #endif
+#if false
                 {
                     //bool stockToolbar = PartWizardPlugin.ToolbarIsStock;
                     bool stockToolbar = GUILayout.Toggle(PartWizardPlugin.ToolbarIsStock, Localized.UseStockToolbar, GUILayout.Width(200));
@@ -293,7 +294,7 @@ namespace PartWizard
                         PartWizardPlugin.Instance.SaveToolbarConfiguration();
                     }
                 }
-
+#endif
 #region Display Mode Control
 
                 GUILayout.BeginHorizontal();
@@ -342,17 +343,18 @@ namespace PartWizard
                     Debug.Log("total # buyable part after dup filter: " + parts.Count.ToString());
                 }
 
-#endregion
+                #endregion
 
                 // The sort by stage was constantly changing the sort, so by doing a sort on 
                 // the persistentId if the stages are equal, the sort stays consistent
                 //
+ 
                 if (parts != null && parts.Count > 0)
                 {
                     switch (sortBy)
                     {
                         case SortBy.Name:
-                            parts.Sort((p, q) => p.partInfo.title.CompareTo(q.partInfo.title));
+                            parts.Sort((p, q) => (p.partInfo.title+ p.persistentId.ToString()).CompareTo(q.partInfo.title+q.persistentId.ToString()));
                             break;
                         case SortBy.StageAsc:
                             if (this.viewType != ViewType.Unavailable)

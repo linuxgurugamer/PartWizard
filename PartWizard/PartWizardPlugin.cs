@@ -48,7 +48,7 @@ namespace PartWizard
         public static readonly string Name = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductName;
         public static readonly string Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
 
-        internal static bool ToolbarIsStock;
+        //internal static bool ToolbarIsStock;
         internal static bool ToolbarTypeToggleActive = false;
         private const string BlizzyToolbarIconActive = "PartWizard/Icons/partwizard_active_toolbar_24_icon";
         private const string BlizzyToolbarIconInactive = "PartWizard/Icons/partwizard_inactive_toolbar_24_icon";
